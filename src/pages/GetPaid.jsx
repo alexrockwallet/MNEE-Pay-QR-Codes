@@ -51,6 +51,7 @@ const NETWORKS = [
 
 const TOKEN_ICONS = { USDC: usdcIcon, USDT: usdtIcon }
 
+
 function NetworkChip({ name }) {
   const icon = NETWORK_CHIP_ICONS[name]
   return (
@@ -64,7 +65,7 @@ function NetworkChip({ name }) {
 function PayWithPill({ token }) {
   const icon = TOKEN_ICONS[token]
   return (
-    <span className="inline-flex items-center gap-2 px-2.5 py-1.5 border border-neutral-200 rounded-lg bg-white">
+    <span className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white" style={{ border: '1px solid rgba(0,0,0,0.6)' }}>
       <img src={icon} alt={token} className="w-6 h-6" />
       <span className="flex flex-col leading-tight">
         <span className="text-[10px] text-neutral-400 font-normal">Pay with</span>
@@ -106,6 +107,7 @@ function StablecoinCard({ token, networks, onPreview }) {
         <button
           onClick={() => onPreview(token)}
           className="flex items-center gap-1.5 px-3 py-2 bg-neutral-100 rounded-lg text-[12px] font-medium text-[#0a0a0a] hover:bg-neutral-200 transition-colors cursor-pointer"
+          style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
         >
           <Eye size={14} />
           Preview
@@ -113,6 +115,7 @@ function StablecoinCard({ token, networks, onPreview }) {
         <button
           onClick={handleDownload}
           className="flex items-center gap-1.5 px-3 py-2 bg-white border border-neutral-200 rounded-lg text-[12px] font-medium text-[#0a0a0a] hover:bg-neutral-50 transition-colors cursor-pointer"
+          style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
         >
           <Download size={14} />
           Download
@@ -134,7 +137,10 @@ function NetworkCard({ network, selected, onToggle }) {
         </div>
       </div>
       <div className="flex gap-2 w-full">
-        <button className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-neutral-100 rounded-lg text-[12px] font-medium text-[#0a0a0a] hover:bg-neutral-200 transition-colors cursor-pointer">
+        <button
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-neutral-100 rounded-lg text-[12px] font-medium text-[#0a0a0a] hover:bg-neutral-200 transition-colors cursor-pointer"
+          style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
+        >
           <Eye size={14} />
           Preview
         </button>
@@ -145,6 +151,7 @@ function NetworkCard({ network, selected, onToggle }) {
               ? 'bg-[#0a0a0a] border-[#0a0a0a] text-white'
               : 'bg-white border-neutral-200 text-[#0a0a0a] hover:bg-neutral-50'
           }`}
+          style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
         >
           {selected ? <Check size={14} /> : <Plus size={14} />}
           {selected ? 'Selected' : 'Select'}
@@ -176,80 +183,80 @@ export default function GetPaid() {
     <div className="min-h-screen flex flex-col bg-white">
       {previewToken && <PreviewModal token={previewToken} onClose={() => setPreviewToken(null)} />}
       {/* Header */}
-      <div className="h-16 border-b border-neutral-200 flex items-center px-4 shrink-0">
-        <div className="flex items-center gap-2 text-[14px]">
-          <QrCode size={16} className="text-neutral-500" />
-          <span className="w-px h-4 bg-neutral-300" />
-          <span className="text-[#0a0a0a]">Get paid</span>
-        </div>
-      </div>
-
-      {/* Scrollable content */}
-      <div className="flex-1 overflow-auto pb-20">
-        <div className="px-12 py-6 flex flex-col gap-8">
-          {/* Page title */}
-          <div className="flex flex-col gap-1">
-            <h1 className="text-[24px] font-semibold text-[#0a0a0a] m-0">Point-of-Sale QR Codes</h1>
-            <p className="text-[16px] text-neutral-400 m-0">
-              Print these QR codes and display them at your point of sale. Customers scan with their wallet app to pay instantly.
-            </p>
-          </div>
-
-          {/* Section 1: Accept all networks */}
-          <div className="flex flex-col gap-3">
-            <h2 className="text-[20px] font-semibold text-[#0a0a0a] m-0">Accept all networks</h2>
-            <div className="flex gap-4">
-              <StablecoinCard token="USDC" networks={USDC_NETWORKS} onPreview={setPreviewToken} />
-              <StablecoinCard token="USDT" networks={USDT_NETWORKS} onPreview={setPreviewToken} />
-            </div>
-          </div>
-
-          {/* Section 2: Individual networks */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-[16px] font-semibold text-[#0a0a0a] m-0">Or download individual networks</h2>
-              <button
-                onClick={toggleAll}
-                className="flex items-center gap-1.5 text-[13px] text-[#0a0a0a] cursor-pointer"
-              >
-                <span className={`w-4 h-4 border rounded flex items-center justify-center transition-colors ${
-                  allSelected ? 'bg-[#0a0a0a] border-[#0a0a0a]' : 'bg-white border-neutral-300'
-                }`}>
-                  {allSelected && <Check size={10} className="text-white" />}
-                </span>
-                Select all
-              </button>
-            </div>
-            <div className="grid grid-cols-4 gap-3">
-              {NETWORKS.map(network => (
-                <NetworkCard
-                  key={network.id}
-                  network={network}
-                  selected={selected.has(network.id)}
-                  onToggle={() => toggleNetwork(network.id)}
-                />
-              ))}
-            </div>
+        <div className="h-16 border-b border-neutral-200 flex items-center px-6 shrink-0">
+          <div className="flex items-center gap-2 text-[14px]">
+            <QrCode size={16} className="text-neutral-500" />
+            <span className="w-px h-4 bg-neutral-300" />
+            <span className="text-[#0a0a0a]">Get paid</span>
           </div>
         </div>
-      </div>
 
-      {/* Sticky bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200">
-        <div className="px-12 py-3 flex justify-end">
-        <button
-          disabled={selectedCount === 0}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-[16px] font-medium transition-colors ${
-            selectedCount > 0
-              ? 'bg-[#D97706] text-white hover:bg-[#B45309] cursor-pointer'
-              : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-          }`}
-        >
-          <Download size={16} />
-          Download selected items ({selectedCount})
-        </button>
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-auto pb-20">
+          <div className="px-6 py-6 flex flex-col gap-8">
+            {/* Page title */}
+            <div className="flex flex-col gap-1">
+              <h1 className="text-[24px] font-semibold text-[#0a0a0a] m-0">Point-of-Sale QR Codes</h1>
+              <p className="text-[16px] text-neutral-400 m-0">
+                Print these QR codes and display them at your point of sale. Customers scan with their wallet app to pay instantly.
+              </p>
+            </div>
+
+            {/* Section 1: Accept all networks */}
+            <div className="flex flex-col gap-3">
+              <h2 className="text-[20px] font-semibold text-[#0a0a0a] m-0">Accept all networks</h2>
+              <div className="flex gap-4">
+                <StablecoinCard token="USDC" networks={USDC_NETWORKS} onPreview={setPreviewToken} />
+                <StablecoinCard token="USDT" networks={USDT_NETWORKS} onPreview={setPreviewToken} />
+              </div>
+            </div>
+
+            {/* Section 2: Individual networks */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-[16px] font-semibold text-[#0a0a0a] m-0">Or download individual networks</h2>
+                <button
+                  onClick={toggleAll}
+                  className="flex items-center gap-1.5 text-[13px] text-[#0a0a0a] cursor-pointer"
+                >
+                  <span className={`w-4 h-4 border rounded flex items-center justify-center transition-colors ${
+                    allSelected ? 'bg-[#0a0a0a] border-[#0a0a0a]' : 'bg-white border-neutral-300'
+                  }`}>
+                    {allSelected && <Check size={10} className="text-white" />}
+                  </span>
+                  Select all
+                </button>
+              </div>
+              <div className="grid grid-cols-4 gap-3">
+                {NETWORKS.map(network => (
+                  <NetworkCard
+                    key={network.id}
+                    network={network}
+                    selected={selected.has(network.id)}
+                    onToggle={() => toggleNetwork(network.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+        {/* Sticky bottom bar */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200">
+          <div className="px-6 py-3 flex justify-end">
+            <button
+              disabled={selectedCount === 0}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-[16px] font-medium transition-colors ${
+                selectedCount > 0
+                  ? 'bg-[#D97706] text-white hover:bg-[#B45309] cursor-pointer'
+                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+              }`}
+            >
+              <Download size={16} />
+              Download selected items ({selectedCount})
+            </button>
+          </div>
+        </div>
     </div>
   )
 }
