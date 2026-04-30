@@ -39,13 +39,13 @@ const USDC_NETWORKS = ['Ethereum', 'Solana', 'Base', 'Arbitrum', 'Polygon', 'BNB
 const USDT_NETWORKS = ['Tron', 'Ethereum', 'BNB', 'Solana', 'Polygon', 'Arbitrum', 'Avalanche']
 
 const NETWORKS = [
-  { id: 'ethereum', name: 'Ethereum', icon: ethIcon,   tokens: ['USDC', 'USDT'] },
-  { id: 'solana',   name: 'Solana',   icon: solIcon,   tokens: ['USDC', 'USDT'] },
+  { id: 'ethereum', name: 'Ethereum', icon: ethIcon,   tokens: ['USDT', 'USDC'] },
+  { id: 'solana',   name: 'Solana',   icon: solIcon,   tokens: ['USDT', 'USDC'] },
   { id: 'base',     name: 'Base',     icon: baseIcon,  tokens: ['USDC'] },
-  { id: 'arbitrum', name: 'Arbitrum', icon: arbIcon,   tokens: ['USDC', 'USDT'] },
-  { id: 'polygon',  name: 'Polygon',  icon: maticIcon, tokens: ['USDC', 'USDT'] },
-  { id: 'bnb',      name: 'BNB',      icon: bnbIcon,   tokens: ['USDC', 'USDT'] },
-  { id: 'avalanche',name: 'Avalanche',icon: avaxIcon,  tokens: ['USDC', 'USDT'] },
+  { id: 'arbitrum', name: 'Arbitrum', icon: arbIcon,   tokens: ['USDT', 'USDC'] },
+  { id: 'polygon',  name: 'Polygon',  icon: maticIcon, tokens: ['USDT', 'USDC'] },
+  { id: 'bnb',      name: 'BNB',      icon: bnbIcon,   tokens: ['USDT', 'USDC'] },
+  { id: 'avalanche',name: 'Avalanche',icon: avaxIcon,  tokens: ['USDT', 'USDC'] },
   { id: 'tron',     name: 'TRON',     icon: trxIcon,   tokens: ['USDT'] },
 ]
 
@@ -65,11 +65,11 @@ function NetworkChip({ name }) {
 function PayWithPill({ token }) {
   const icon = TOKEN_ICONS[token]
   return (
-    <span className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white" style={{ border: '1px solid rgba(0,0,0,0.6)' }}>
-      <img src={icon} alt={token} className="w-6 h-6" />
+    <span className="inline-flex items-center gap-1 rounded-lg bg-white" style={{ border: '1px solid rgba(0,0,0,0.6)', fontFamily: "'DM Sans', sans-serif", padding: '4px 6px' }}>
+      <img src={icon} alt={token} className="w-5 h-5" />
       <span className="flex flex-col leading-tight">
-        <span className="text-[10px] text-neutral-400 font-normal">Pay with</span>
-        <span className="text-[13px] font-semibold text-[#0a0a0a]">{token}</span>
+        <span className="text-[6px] text-neutral-400" style={{ fontWeight: 300 }}>Pay with</span>
+        <span className="text-[10px] font-semibold text-[#0a0a0a]">{token}</span>
       </span>
     </span>
   )
@@ -141,7 +141,7 @@ function NetworkCard({ network, selected, onToggle }) {
           className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-neutral-100 rounded-lg text-[12px] font-medium text-[#0a0a0a] hover:bg-neutral-200 transition-colors cursor-pointer"
           style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
         >
-          <Eye size={14} />
+          <Eye size={16} />
           Preview
         </button>
         <button
@@ -153,7 +153,7 @@ function NetworkCard({ network, selected, onToggle }) {
           }`}
           style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
         >
-          {selected ? <Check size={14} /> : <Plus size={14} />}
+          {selected ? <Check size={16} /> : <Plus size={16} />}
           {selected ? 'Selected' : 'Select'}
         </button>
       </div>
@@ -183,10 +183,14 @@ export default function GetPaid() {
     <div className="min-h-screen flex flex-col bg-white">
       {previewToken && <PreviewModal token={previewToken} onClose={() => setPreviewToken(null)} />}
       {/* Header */}
-        <div className="h-16 border-b border-neutral-200 flex items-center px-6 shrink-0">
+        <div className="h-16 border-b border-neutral-200 flex items-center px-4 shrink-0">
           <div className="flex items-center gap-2 text-[14px]">
-            <QrCode size={16} className="text-neutral-500" />
-            <span className="w-px h-4 bg-neutral-300" />
+            <div className="w-7 h-7 flex items-center justify-center shrink-0">
+              <QrCode size={16} className="text-neutral-500" />
+            </div>
+            <div className="w-4 flex justify-center">
+              <span className="w-px h-[17px] bg-neutral-300" />
+            </div>
             <span className="text-[#0a0a0a]">Get paid</span>
           </div>
         </div>
