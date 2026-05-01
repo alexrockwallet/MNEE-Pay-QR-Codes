@@ -96,7 +96,7 @@ function StablecoinCard({ token, networks, onPreview }) {
         <div className="flex flex-col gap-2">
           <p className="text-[18px] font-semibold text-[#0a0a0a] m-0">Get paid in {token}</p>
           <div className="flex flex-col gap-1.5">
-            <p className="text-[14px] text-neutral-400 m-0">Available on:</p>
+            <p className="text-[14px] text-neutral-500 m-0">Available on:</p>
             <div className="flex flex-wrap gap-1.5">
               {networks.map(n => <NetworkChip key={n} name={n} />)}
             </div>
@@ -197,11 +197,11 @@ export default function GetPaid() {
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-auto pb-20">
-          <div className="px-6 py-6 flex flex-col gap-8">
+          <div className="px-6 py-6 flex flex-col gap-8 min-w-[900px]">
             {/* Page title */}
             <div className="flex flex-col gap-1">
               <h1 className="text-[24px] font-semibold text-[#0a0a0a] m-0">Point-of-Sale QR Codes</h1>
-              <p className="text-[16px] text-neutral-400 m-0">
+              <p className="text-[16px] text-neutral-500 m-0">
                 Print these QR codes and display them at your point of sale. Customers scan with their wallet app to pay instantly.
               </p>
             </div>
@@ -253,7 +253,7 @@ export default function GetPaid() {
               className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-[16px] font-medium transition-colors ${
                 selectedCount > 0
                   ? 'bg-[#D97706] text-white hover:bg-[#B45309] cursor-pointer'
-                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                  : 'bg-[#cecece] text-neutral-500 cursor-not-allowed'
               }`}
             >
               <Download size={16} />
