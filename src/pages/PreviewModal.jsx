@@ -14,7 +14,7 @@ export default function PreviewModal({ token, onClose }) {
     <div
       style={{
         position: 'fixed', inset: 0, zIndex: 50,
-        background: 'rgba(0,0,0,0.6)',
+        background: 'rgba(0,0,0,0.3)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
       onClick={onClose}
@@ -30,7 +30,7 @@ export default function PreviewModal({ token, onClose }) {
       >
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 28 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#0a0a0a' }}>Preview</span>
+          <span style={{ fontSize: 18, fontWeight: 600, color: '#0a0a0a' }}>Preview</span>
           <button
             onClick={onClose}
             style={{
@@ -43,29 +43,27 @@ export default function PreviewModal({ token, onClose }) {
           </button>
         </div>
 
-        {/* Sheet image */}
         <img
           src={`/qr-${token.toLowerCase()}.png`}
           alt={`QR codes for ${token}`}
-          style={{ width: 420, height: 595, display: 'block', objectFit: 'contain' }}
+          style={{ width: 420, height: 595, display: 'block' }}
         />
 
         {/* Download button */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button
-            onClick={handleDownload}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              width: 104, height: 28, justifyContent: 'center',
-              background: '#fff', border: '1px solid #e4e4e4',
-              borderRadius: 6, fontSize: 12, fontWeight: 500,
-              color: '#0a0a0a', cursor: 'pointer',
-            }}
-          >
-            <Download size={14} />
-            Download
-          </button>
-        </div>
+        <button
+          onClick={handleDownload}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            width: 104, height: 28, justifyContent: 'center',
+            alignSelf: 'center',
+            background: '#fff', border: '1px solid #e4e4e4',
+            borderRadius: 8, fontSize: 12, fontWeight: 500,
+            color: '#0a0a0a', cursor: 'pointer',
+          }}
+        >
+          <Download size={14} />
+          Download
+        </button>
       </div>
     </div>
   )
